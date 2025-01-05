@@ -1,39 +1,41 @@
-import React from 'react'
-import Nav from './Componets/Headercontent/Navbar/Nav'
-import Hero from './Componets/Bodycontent/Hero/Hero'
-import Banner from './Componets/Bodycontent/Banners/Banner'
-import Bannertwo from './Componets/Bodycontent/Banners/Bannertwo'
-import Bannerthree from './Componets/Bodycontent/Banners/Bannerthree'
-import Dashboard from './Componets/Dashboard/Dashboard'
-import Bannerfour from './Componets/Bodycontent/Banners/Bannerfour';
-import Bannerfive from './Componets/Bodycontent/Banners/Bannerfive';
-import 'bootstrap/dist/css/bootstrap.min.css'
-{/*import Signup from './Componets/Signup/Signup';*/}
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import React from "react";
+import Nav from "./Componets/Headercontent/Navbar/Nav";
+import Dashboard from "./Componets/Dashboard/Dashboard";
+import Signup from "./Componets/Signup/Signup";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Home from "./Componets/Bodycontent/Home/home";
+import Coverage from "./Componets/Bodycontent/Coverage/Coverage";
+import About from "./Componets/Bodycontent/About/About";
+import Trends from "./Componets/Bodycontent/Trends/Trends";
+import Login from "./Componets/Signup/Login";
 
 const App = () => {
-  return <>
-  {/*<BrowserRouter>*/}
-   <main className="overflow-x-hidden">
-     <Nav />
-     <Hero />
-     <Banner />
-     <Bannertwo />
-     <Bannerthree />
-     <Bannerfour />
-     <Bannerfive />
-     <Dashboard  />
-     {/*<Routes>
-      <Route path="/Signup" element={<Signup />}> </Route>
-     </Routes>*/}
+  return (
+    <BrowserRouter>
+      <MainContent />
+    </BrowserRouter>
+  );
+};
 
+const MainContent = () => {
+  const location = useLocation();
+  const noNavRoutes = ["/signup", "/login"];
+
+  return (
+    <main className="overflow-x-hidden">
+      {!noNavRoutes.includes(location.pathname) && <Nav />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/coverage" element={<Coverage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/trends" element={<Trends />} />
+      </Routes>
     </main>
-{/*</BrowserRouter>*/}
-  
-  </>
-    
-  
-}
+  );
+};
 
-export default App
+export default App;
